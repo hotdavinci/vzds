@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cantinho proibido 🚫🔒</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    font-family:Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top, #5c0b25 0%, #17000b 42%, #050505 100%);
+    color:#fff;
+}
+
+.card{
+    width:100%;
+    max-width:430px;
+    position:relative;
+    overflow:hidden;
+    padding:20px;
+    border-radius:26px;
+    background:linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.05);
+    backdrop-filter:blur(10px);
+}
+
+.glow{
+    position:absolute;
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background:rgba(255,23,68,.15);
+    filter:blur(35px);
+    top:-75px;
+    right:-45px;
+    pointer-events:none;
+}
+
+.topline{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:14px;
+    position:relative;
+    z-index:3;
+}
+
+.age{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:10px;
+    font-weight:700;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#ff1744;
+    box-shadow:0 0 18px rgba(255,23,68,.35);
+}
+
+.live{
+    font-size:10px;
+    color:#9effb2;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.live::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#38ef63;
+    box-shadow:0 0 9px #38ef63;
+}
+
+h1{
+    font-size:27px;
+    line-height:1.02;
+    text-transform:uppercase;
+    max-width:300px;
+    position:relative;
+    z-index:3;
+}
+
+h1 span{
+    background:linear-gradient(90deg,#ff1744,#ff5c95);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+    margin-top:8px;
+    max-width:340px;
+    color:#c7bac1;
+    font-size:13px;
+    line-height:1.45;
+    position:relative;
+    z-index:3;
+}
+
+.collage{
+    position:relative;
+    height:355px;
+    margin-top:18px;
+}
+
+.media-item{
+    position:absolute;
+    overflow:hidden;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.13);
+    background:#1a1015;
+    box-shadow:0 12px 28px rgba(0,0,0,.35);
+}
+
+.media-item img,
+.media-item video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    background:#140d11;
+}
+
+.media-item::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(transparent 58%, rgba(0,0,0,.40));
+    pointer-events:none;
+}
+
+.media-label{
+    position:absolute;
+    left:8px;
+    bottom:8px;
+    z-index:2;
+    font-size:10px;
+    font-weight:700;
+    color:#fff;
+    padding:5px 8px;
+    border-radius:999px;
+    background:rgba(0,0,0,.48);
+    border:1px solid rgba(255,255,255,.10);
+    backdrop-filter:blur(8px);
+}
+
+.m1{ width:38%; height:128px; left:0; top:68px; transform:rotate(-9deg); z-index:1; }
+.m2{ width:35%; height:110px; right:10px; top:42px; transform:rotate(8deg); z-index:1; }
+.m3{ width:48%; height:158px; left:22%; top:28px; transform:rotate(-3deg); z-index:2; }
+.m4{ width:50%; height:138px; left:2px; top:175px; transform:rotate(5deg); z-index:2; }
+.m5{ width:36%; height:122px; right:0; top:152px; transform:rotate(-7deg); z-index:1; }
+.m6{ width:39%; height:106px; left:16%; bottom:8px; transform:rotate(-4deg); z-index:3; }
+.m7{ width:33%; height:112px; right:20px; bottom:16px; transform:rotate(6deg); z-index:2; }
+.m8{ width:44%; height:148px; left:50%; top:108px; transform:translateX(-50%) rotate(2deg); z-index:0; opacity:.92; }
+
+.badge{
+    position:absolute;
+    z-index:8;
+    min-width:118px;
+    padding:11px 13px;
+    border-radius:16px;
+    background:rgba(15,10,13,.68);
+    border:1px solid rgba(255,255,255,.10);
+    box-shadow:0 14px 30px rgba(0,0,0,.28);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    transform:translate(var(--tx, 0), var(--ty, 0));
+    animation:floatSmooth 4.8s cubic-bezier(.45,.05,.55,.95) infinite;
+    will-change:transform;
+}
+
+.badge strong{
+    display:block;
+    font-size:18px;
+    line-height:1;
+    color:#ff4a74;
+    font-weight:800;
+}
+
+.badge span{
+    display:block;
+    margin-top:4px;
+    font-size:9px;
+    letter-spacing:1px;
+    color:#eadfe3;
+}
+
+.b1{
+    left:6px;
+    top:12px;
+}
+
+.b2{
+    right:6px;
+    bottom:6px;
+    animation-delay:.9s;
+}
+
+@keyframes floatSmooth{
+    0%, 100%{
+        transform:translate(var(--tx, 0), var(--ty, 0)) translateY(0px);
+    }
+    50%{
+        transform:translate(var(--tx, 0), var(--ty, 0)) translateY(-8px);
+    }
+}
+
+.cta-box{
+    margin-top:14px;
+    padding:14px;
+    border-radius:18px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+.cta-title{
+    font-size:15px;
+    font-weight:700;
+    margin-bottom:9px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+.cta-png{
+    height:2em;
+    width:auto;
+    max-width:45px;
+    object-fit:contain;
+    display:inline-block;
+    flex-shrink:0;
+}
+
+.features{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin-bottom:14px;
+}
+
+.feature{
+    position:relative;
+    width:100%;
+    padding:10px 12px 10px 30px;
+    border-radius:10px;
+    font-size:12px;
+    font-weight:600;
+
+    color:#ff4d67;
+    text-shadow:
+        0 0 6px rgba(255,45,75,.35),
+        0 0 12px rgba(255,45,75,.15);
+
+    background:rgba(255,255,255,.025);
+    border:1px solid rgba(255,255,255,.05);
+    border-left:2px solid rgba(255,45,75,.55);
+}
+
+.feature::before{
+    content:"";
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+
+    width:6px;
+    height:6px;
+    border-radius:50%;
+
+    background:#ff304f;
+    box-shadow:
+        0 0 6px rgba(255,48,79,.75),
+        0 0 12px rgba(255,48,79,.35);
+}
+
+.btn{
+    display:block;
+    width:100%;
+    text-align:center;
+    text-decoration:none;
+    padding:15px 12px;
+    border-radius:14px;
+    color:white;
+    font-size:14px;
+    font-weight:800;
+    background:linear-gradient(90deg,#ff1744,#ff3d72);
+    box-shadow:0 10px 24px rgba(255,23,68,.27);
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.note{
+    margin-top:10px;
+    text-align:center;
+    font-size:9px;
+    line-height:1.5;
+    color:#6f646a;
+}
+
+.note strong{
+    color:#9a8d93;
+}
+
+@media(max-width:390px){
+    .card{ padding:16px; }
+    h1{ font-size:24px; }
+    .collage{ height:330px; }
+
+    .m1{ height:118px; }
+    .m2{ height:100px; }
+    .m3{ height:145px; }
+    .m4{ height:126px; }
+    .m5{ height:110px; }
+    .m6{ height:96px; }
+    .m7{ height:100px; }
+    .m8{ height:136px; }
+
+    .badge{
+        min-width:106px;
+        padding:10px 12px;
+    }
+    .badge strong{
+        font-size:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="card">
+    <div class="glow"></div>
+
+    <div class="topline">
+        <div class="age">18</div>
+        <div class="live">Grupo ativo</div>
+    </div>
+
+    <h1>Cantinho <span>proibido</span>🔥🔒 </h1>
+
+    <p class="subtitle">
+
+    </p>
+
+    <section class="collage">
+        <div class="media-item m8" data-slot="8"></div>
+        <div class="media-item m1" data-slot="1"></div>
+        <div class="media-item m2" data-slot="2"></div>
+        <div class="media-item m3" data-slot="3"></div>
+        <div class="media-item m4" data-slot="4"></div>
+        <div class="media-item m5" data-slot="5"></div>
+        <div class="media-item m6" data-slot="6"></div>
+        <div class="media-item m7" data-slot="7"></div>
+
+        <div class="badge b1">
+            <strong>+ 4.000</strong>
+            <span>MEMBROS</span>
+        </div>
+
+        <div class="badge b2">
+            <strong>+ 20.000</strong>
+            <span>CONTEÚDOS</span>
+        </div>
+    </section>
+
+    <section class="cta-box">
+        <div class="cta-title">Lado oculto do <img src="img/logo.png" class="cta-png" alt=""></div>
+
+        <div class="features">
+            <div class="feature">Estudantes 🎓</div>
+            <div class="feature">N0v1nhas baixa renda</div>
+            <div class="feature">F3tich3s proib1d0s 🚫</div>
+            <div class="feature">Listas de a-z</div>
+        </div>
+
+        <a href="https://t.me/cantinhoproibidobot/start=123" class="btn">
+             ENTRAR AGORA🔥
+        </a>
+    </section>
+
+</main>
+
+<script>
+const imageExtensions = ["jpg", "jpeg", "png", "webp"];
+const videoExtensions = ["mp4", "webm", "ogg"];
+const allExtensions = [...imageExtensions, ...videoExtensions];
+
+function createLabel(text){
+    const label = document.createElement("div");
+    label.className = "media-label";
+    label.textContent = text;
+    return label;
+}
+
+function setPlaceholder(container, slot){
+    container.innerHTML = "";
+    const ph = document.createElement("div");
+    ph.style.width = "100%";
+    ph.style.height = "100%";
+    ph.style.display = "flex";
+    ph.style.alignItems = "center";
+    ph.style.justifyContent = "center";
+    ph.style.textAlign = "center";
+    ph.style.padding = "10px";
+    ph.style.color = "#a6949c";
+    ph.style.fontSize = "11px";
+    ph.style.lineHeight = "1.35";
+    ph.innerHTML = "Adicione<br>img/media (" + slot + ").*";
+    container.appendChild(ph);
+}
+
+function tryLoadMedia(slot, container, index = 0){
+    if(index >= allExtensions.length){
+        setPlaceholder(container, slot);
+        return;
+    }
+
+    const ext = allExtensions[index];
+    const src = `img/media (${slot}).${ext}`;
+    const isVideo = videoExtensions.includes(ext);
+
+    if(isVideo){
+        const video = document.createElement("video");
+        video.src = src;
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.setAttribute("playsinline", "");
+        video.preload = "metadata";
+
+        video.onloadeddata = () => {
+            container.innerHTML = "";
+            container.appendChild(video);
+            container.appendChild(createLabel("▶ vídeo"));
+            video.play().catch(() => {});
+        };
+
+        video.onerror = () => tryLoadMedia(slot, container, index + 1);
+    }else{
+        const img = new Image();
+        img.src = src;
+
+        img.onload = () => {
+            container.innerHTML = "";
+            container.appendChild(img);
+            container.appendChild(createLabel("📸 mídia"));
+        };
+
+        img.onerror = () => tryLoadMedia(slot, container, index + 1);
+    }
+}
+
+document.querySelectorAll(".media-item[data-slot]").forEach(item => {
+    const slot = item.getAttribute("data-slot");
+    tryLoadMedia(slot, item);
+});
+</script>
+
+</body>
+</html>
